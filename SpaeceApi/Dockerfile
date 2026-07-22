@@ -1,14 +1,18 @@
 FROM ://microsoft.com AS build
-WORKDIR /src
-COPY ["SpaeceApi.csproj", "./"]
-RUN dotnet restore "./SpaeceApi.csproj"
-COPY . .
-RUN dotnet build "SpaeceApi.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "SpaeceApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM ://microsoft.com AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+
+# Copia os arquivos e restaura as dependências
+COPY . .
+RUN dotnet restore "SpaeceApi.csproj"
+
+# Compila o projeto em modo Release
+RUN dotnet publish "SpaeceApi.csproj" -c Release -o /out
+
+# Cria a imagem final de execução
+FROM ://microsoft.com
+WORKDIR /app
+COPY --from=build /out .
+
+# Expõe a porta e define o ponto de entrada do sistema
+EXPOSE 5020
 ENTRYPOINT ["dotnet", "SpaeceApi.dll"]
