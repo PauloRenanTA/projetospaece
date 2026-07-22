@@ -231,3 +231,21 @@ function reiniciarSimuladoAtual() {
         console.error("Erro ao reiniciar o simulador:", erro);
     }
 }
+
+function finalizarTreinoPrecoce() {
+    try {
+        if (indiceAtual === 0 && document.getElementById('feedback').classList.contains('hidden')) {
+            alert("Você ainda não respondeu nenhuma questão neste treino.");
+            return;
+        }
+        let questoesRespondidas = indiceAtual;
+        if (!document.getElementById('feedback').classList.contains('hidden')) {
+            questoesRespondidas = indiceAtual + 1;
+        }
+        document.getElementById('tela-simulado').classList.add('hidden');
+        document.getElementById('tela-pontuacao').classList.remove('hidden');
+        document.getElementById('placar-texto').innerText = `Você acertou ${acertos} de ${questoesRespondidas} ${questoesRespondidas === 1 ? 'questão respondida' : 'questões respondidas'}!`;
+    } catch (erro) {
+        console.error("Erro ao finalizar treino:", erro);
+    }
+}
