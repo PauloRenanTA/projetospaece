@@ -5,7 +5,7 @@ const ASSETS = [
   '/app.js',
   '/style.css',
   '/manifest.json',
-  '/icone.jpg',
+  '/imagens/icone.jpg',
   '/imagens/gato.jpg' // Adicione aqui os caminhos de novas imagens que cadastrar
 ];
 
