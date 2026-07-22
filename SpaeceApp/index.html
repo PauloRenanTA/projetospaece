@@ -51,7 +51,15 @@
                 <button id="btn-proxima" onclick="proximaQuestao()">Próxima Questão</button>
             </div>
             
-            <button onclick="voltarParaMenu()" style="margin-top: 20px; width: 100%; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">↩ Voltar ao Menu</button>
+            <!-- BOTÕES DE CONTROLE INFERIOR LADO A LADO -->
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button onclick="finalizarTreinoPrecoce()" style="flex: 1; background: #dc3545; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    🛑 Finalizar Treino
+                </button>
+                <button onclick="voltarParaMenu()" style="flex: 1; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">
+                    ↩ Voltar
+                </button>
+            </div>
         </main>
 
         <!-- 3. TELA DE PONTUAÇÃO FINAL -->
