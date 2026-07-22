@@ -204,3 +204,30 @@ if ('serviceWorker' in navigator) {
         .then(() => console.log("Modo Aplicativo pronto!"))
         .catch(err => console.log("Erro ao ativar Modo Aplicativo:", err));
 }
+
+// Reiniciar o simulado mantendo o mesmo ano e matéria
+function reiniciarSimuladoAtual() {
+    try {
+        if (questoesFiltradas.length === 0) {
+            alert("Não há questões para reiniciar.");
+            return;
+        }
+
+        acertos = 0;      // Reseta os acertos
+        indiceAtual = 0;  // Reseta para a primeira questão
+
+        // Reembaralha as questões para não virem na mesma ordem de antes
+        if (typeof cacheFiltro !== 'undefined') {
+            questoesFiltradas = embaralhar(questoesFiltradas);
+        }
+
+        // Alterna as telas caso o aluno esteja na tela de pontuação
+        document.getElementById('tela-pontuacao').classList.add('hidden');
+        document.getElementById('tela-simulado').classList.remove('hidden');
+
+        // Atualiza a tela com a primeira pergunta do recomeço
+        mostrarQuestao();
+    } catch (erro) {
+        console.error("Erro ao reiniciar o simulador:", erro);
+    }
+}
