@@ -57,6 +57,17 @@ let indiceAtual = 0;
 let acertos = 0; // Contabiliza os acertos do aluno
 
 // Função chamada quando o aluno clica em um botão do Menu
+// Função auxiliar para embaralhar uma lista (Algoritmo Fisher-Yates)
+function embaralhar(array) {
+    let lista = [...array];
+    for (let i = lista.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [lista[i], lista[j]] = [lista[j], lista[i]];
+    }
+    return lista;
+}
+
+// Função chamada quando o aluno clica em um botão do Menu
 function iniciarSimulado(ano, materia) {
     try {
         acertos = 0;
@@ -65,14 +76,21 @@ function iniciarSimulado(ano, materia) {
         const materiaFiltro = materia.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         const anoFiltro = String(ano).trim();
 
-        // Filtra as questões locais instantaneamente
-        questoesFiltradas = questoes.filter(q => {
+        // 1. Filtra as questões que combinam com o botão clicado
+        let questoesFiltradasNoFiltro = questoes.filter(q => {
             const qMateria = q.materia ? q.materia.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() : "";
             const qAno = q.ano ? String(q.ano).trim() : "";
             return qAno === anoFiltro && qMateria === materiaFiltro;
         });
 
-        indiceAtual = 0; // Reseta o contador de questões
+        if (questoesFiltradasNoFiltro.length === 0) {
+            questoesFiltradasNoFiltro = questoes; 
+        }
+
+        // 2. EMBARALHA as questões encontradas para esta sessão!
+        questoesFiltradas = embaralhar(questoesFiltradasNoFiltro);
+
+        indiceAtual = 0; // Reseta o contador de questões para o início
 
         // Alterna as telas: esconde o menu e mostra o simulado
         document.getElementById('tela-menu').classList.add('hidden');
