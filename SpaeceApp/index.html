@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado SPAECE</title>
+    <link rel="manifest" href="app.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- A caixinha que segura o tamanho de celular no PC (Tudo deve ficar aqui dentro!) -->
+    <div class="app-container">
+        
+        <header>
+            <h1>Simulado SPAECE</h1>
+        </header>
+
+        <!-- 1. TELA DE MENU INICIAL -->
+        <main id="tela-menu" class="quiz-card">
+            <div style="margin-bottom: 25px;">
+                <h3 style="font-size: 1.1rem; color: #005a9e; margin-bottom: 10px; border-bottom: 2px solid #e1f5fe; padding-bottom: 5px;">
+                     2º Ano do Ensino Fundamental
+                </h3>
+                <div class="options-container" style="gap: 12px;">
+                    <button class="menu-btn" onclick="iniciarSimulado('2', 'Portugues')">Língua Portuguesa</button>
+                    <button class="menu-btn" onclick="iniciarSimulado('2', 'Matematica')">Matemática</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="font-size: 1.1rem; color: #c33d13; margin-bottom: 10px; border-bottom: 2px solid #fbe9e7; padding-bottom: 5px;">
+                     5º Ano do Ensino Fundamental
+                </h3>
+                <div class="options-container" style="gap: 12px;">
+                    <button class="menu-btn" style="border-color: #c33d13; color: #c33d13;" onmouseover="this.style.backgroundColor='#c33d13'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#fff'; this.style.color='#c33d13';" onclick="iniciarSimulado('5', 'Portugues')">Língua Portuguesa</button>
+                    <button class="menu-btn" style="border-color: #c33d13; color: #c33d13;" onmouseover="this.style.backgroundColor='#c33d13'; this.style.color='#fff';" onmouseout="this.style.backgroundColor='#fff'; this.style.color='#c33d13';" onclick="iniciarSimulado('5', 'Matematica')">Matemática</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- 2. TELA DO SIMULADO -->
+        <main id="tela-simulado" class="quiz-card hidden">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <span id="descritor-tag" class="badge">Carregando...</span>
+            </div>
+            <p id="enunciado">Buscando questões...</p>
+            <img id="questao-imagem" src="" class="hidden" alt="Imagem da questão" style="width:100%; max-height:200px; object-fit:contain; margin-bottom:15px; border-radius:8px;">
+            <div id="alternativas" class="options-container"></div>
+            <div id="feedback" class="feedback-box hidden">
+                <p id="feedback-texto"></p>
+                <button id="btn-proxima" onclick="proximaQuestao()">Próxima Questão</button>
+            </div>
+            <button onclick="voltarParaMenu()" style="margin-top: 20px; width: 100%; background: #6c757d; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">↩ Voltar ao Menu</button>
+        </main>
+
+        <!-- 3. TELA DE PONTUAÇÃO FINAL (AGORA NO LUGAR CORRETO, DENTRO DO APP-CONTAINER!) -->
+        <main id="tela-pontuacao" class="quiz-card hidden" style="text-align: center; padding: 25px 20px;">
+            <div style="font-size: 3.5rem; margin-bottom: 10px;">🏆</div>
+            <h2 style="font-size: 1.4rem; color: #333; margin-bottom: 10px;">Simulado Concluído!</h2>            
+            <div style="background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                <span id="placar-texto" style="font-size: 1.2rem; font-weight: bold; color: #0078d4; display: block;">
+                    Você acertou 0 de 0
+                </span>
+            </div>
+
+            <button onclick="voltarParaMenuDoPlacar()" class="menu-btn" style="background-color: #28a745; border-color: #28a745; color: white; width: 100%;">
+                ↩ Jogar Novamente
+            </button>
+        </main>
+
+    </div> <!-- Fim do app-container -->
+
+    <script src="app.js"></script>
+</body>
+
+</html>

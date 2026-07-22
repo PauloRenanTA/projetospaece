@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Cadastro - SPAECE</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .form-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px; }
+        label { font-weight: bold; color: #333; font-size: 0.9rem; }
+        input, select, textarea { padding: 10px; border: 2px solid #e9ecef; border-radius: 8px; font-size: 1rem; width: 100%; }
+        input:focus, select:focus, textarea:focus { border-color: #0078d4; outline: none; }
+        button { background: #0078d4; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px; width: 100%; transition: 0.2s; }
+        button:hover { background: #005a9e; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Painel do Professor</h1>
+            <p style="font-size: 0.9rem; margin-top: 4px;">Cadastrar Questão do SPAECE</p>
+        </header>
+
+        <main class="quiz-card">
+            <form id="form-cadastro" onsubmit="salvarQuestao(event)">
+                <div class="form-group">
+                    <label>Ano Escolar:</label>
+                    <select id="ano" required>
+                        <option value="2">2º Ano do Ensino Fundamental</option>
+                        <option value="5">5º Ano do Ensino Fundamental</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Matéria:</label>
+                    <select id="materia" required>
+                        <option value="Portugues">Língua Portuguesa</option>
+                        <option value="Matematica">Matemática</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Código do Descritor (Ex: D1, D24):</label>
+                    <input type="text" id="descritor" placeholder="Ex: D3" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Enunciado da Questão:</label>
+                    <textarea id="enunciado" rows="3" placeholder="Digite a pergunta aqui..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Nome do Arquivo de Imagem (Opcional):</label>
+                    <input type="text" id="imagemUrl" placeholder="Ex: http://localhost:5020/imagens/foto.jpg">
+                </div>
+
+                <div style="background: #f8f9fa; padding: 10px; border-radius: 10px; margin-top: 15px; border: 1px solid #e9ecef;">
+                    <label style="display:block; margin-bottom: 8px; color: #0078d4;">Alternativas:</label>
+                    <div class="form-group"><input type="text" id="alt0" placeholder="Alternativa A" required></div>
+                    <div class="form-group"><input type="text" id="alt1" placeholder="Alternativa B" required></div>
+                    <div class="form-group"><input type="text" id="alt2" placeholder="Alternativa C" required></div>
+                    <div class="form-group"><input type="text" id="alt3" placeholder="Alternativa D" required></div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Qual é a Alternativa Correta?</label>
+                    <select id="alternativaCorreta" required>
+                        <option value="0">Alternativa A</option>
+                        <option value="1">Alternativa B</option>
+                        <option value="2">Alternativa C</option>
+                        <option value="3">Alternativa D</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Explicação Pedagógica (Gabarito Comentado):</label>
+                    <textarea id="explicacao" rows="2" placeholder="Explique por que esta alternativa é a correta..." required></textarea>
+                </div>
+
+                <button type="submit">💾 Gravar Questão no SQLite</button>
+            </form>
+            
+            <a href="index.html" style="display: block; text-align: center; margin-top: 15px; color: #6c757d; text-decoration: none; font-size: 0.9rem;">← Voltar para o Simulado</a>
+        </main>
+    </div>
+
+    <script src="cadastro.js"></script>
+</body>
+</html>
